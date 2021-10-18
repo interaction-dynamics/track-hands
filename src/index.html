@@ -111,6 +111,7 @@
         color: 0x666666,
         shading: THREE.FlatShading,
         side: THREE.DoubleSide,
+        // alphaMap:
       })
 
       var manager = new THREE.LoadingManager()
@@ -121,6 +122,7 @@
 
       var loader = new OBJLoader(manager)
       loader.load(
+        // './hand-for-lane.obj',
         'https://rawgit.com/tr13ze/folio/gh-pages/obj/hand.obj',
         object => {
           object.traverse(function (child) {
@@ -183,26 +185,26 @@
       // composer.addPass(rgbSplit)
 
       //Tween
-      setInterval(animeIn, 7000)
-      function animeIn() {
-        setTimeout(animeOne, 700)
-      }
-      function animeOne() {
-        rgbSplit.uniforms['amount'].value = 0.01
-        setTimeout(animeTwo, 100)
-      }
-      function animeTwo() {
-        rgbSplit.uniforms['amount'].value = 0.003
-        setTimeout(animeThree, 100)
-      }
-      function animeThree() {
-        rgbSplit.uniforms['amount'].value = 0.05
-        setTimeout(animeOut, 100)
-      }
+      // setInterval(animeIn, 7000)
+      // function animeIn() {
+      //   setTimeout(animeOne, 700)
+      // }
+      // function animeOne() {
+      //   rgbSplit.uniforms['amount'].value = 0.01
+      //   setTimeout(animeTwo, 100)
+      // }
+      // function animeTwo() {
+      //   rgbSplit.uniforms['amount'].value = 0.003
+      //   setTimeout(animeThree, 100)
+      // }
+      // function animeThree() {
+      //   rgbSplit.uniforms['amount'].value = 0.05
+      //   setTimeout(animeOut, 100)
+      // }
 
-      function animeOut() {
-        rgbSplit.uniforms['amount'].value = 0.003
-      }
+      // function animeOut() {
+      //   rgbSplit.uniforms['amount'].value = 0.003
+      // }
 
       //resize & mouseEvent
       // document.addEventListener('mousemove', onDocumentMouseMove, false)
