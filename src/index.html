@@ -24,9 +24,18 @@
         bottom: 0;
         z-index: -1;
       }
+
+      #video {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
     </style>
     <div id="canvas"></div>
+    <div id="video"></div>
   </body>
+  <script src="https://unpkg.com/handsfree@8.5.1/build/lib/handsfree.js"></script>
+
   <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three'
 
@@ -43,7 +52,7 @@
 
     // import { STLLoader } from './jsm/loaders/STLLoader.js'
 
-    let renderer, scene, camera, composer, mesh, object
+    let renderer, scene, camera, composer, mesh, hand
     let mouseX = 0,
       mouseY = 0
     let windowHalfX = window.innerWidth / 2
@@ -140,8 +149,8 @@
           object.scale.x = 2
           object.scale.y = 2
           object.scale.z = 2
-          const obj = object
-          scene.add(obj)
+          hand = object
+          scene.add(hand)
         }
       )
 
@@ -230,6 +239,8 @@
       camera.position.x -= (mouseX + camera.position.x) * 0.05
       camera.position.y -= (-mouseY + camera.position.y) * 0.05
 
+      // hand.rotation = handsfree.model.handpose.three.centerPalmObj.rotation
+
       //animation object
       mesh.rotation.y += 0.003
       //end animation
@@ -245,5 +256,27 @@
       init()
       animate()
     }
+
+    const handsfree = new Handsfree({
+      handpose: true,
+      setup: {
+        wrap: {
+          $el: document.querySelector('#video'),
+        },
+      },
+    })
+
+    document.addEventListener('handsfree-data', event => {
+      const data = event.detail
+      if (!data.handpose) return
+
+      // hand.rotation = data.handpose.three.centerPalmObj.rotation
+
+      console.log(data.handpose)
+
+      // render()
+    })
+    // handsfree.enablePlugins('browser')
+    handsfree.start()
   </script>
 </html>
